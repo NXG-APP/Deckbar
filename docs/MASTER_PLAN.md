@@ -7,7 +7,7 @@
 > **Use cases live in R2SS, project "PROJ010 - Deckbar gamification".** This plan orders the work; the use
 > cases say what "done" means. When the two disagree, the use case wins and this plan is corrected.
 
-**Last updated:** 2026-11-08 (repository set up with PROJ003's framework, process and governance; R2SS PROJ010 read; qc review fixed; cloud and laptop rules)
+**Last updated:** 2026-11-08 (set-up done; BA pass on all 8 use cases - all NOT READY; clarification Q&A of 33 decisions waiting on Vincent)
 
 Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ blocked · 🟡 waiting on Vincent
 
@@ -20,7 +20,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | Phase | **P0 - repository set-up** ✅ 2026-11-08, on branch `ccr-67d107f0-67ed0e` (the first branch pushed to an empty repository, so GitHub shows it as the default until `main` is made - KNOWN_ISSUES #3). qc review done, its findings fixed. No app code yet |
 | On `main` | Nothing - `main` does not exist yet |
 | Released | Not released |
-| Next step | 🟡 Vincent: review the set-up; create `main` from `ccr-67d107f0-67ed0e` and make it the default branch; then clone on the laptop (`README.md` "On the laptop"). Then **P1 - requirements to READY**: section 4 answered in R2SS PROJ010, a ba-agent pass per use case |
+| Next step | 🟡 Vincent: answer `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-08.md` (33 decisions; "accept all" works). Then Claude Code writes the answers into R2SS (numbered AC per use case, new use cases UC09-UC12 with your OK) and the detail files, and the ba-agent re-checks to READY. Also: create `main` (B10) and clone on the laptop |
 | Blocked on | 🟡 Vincent: section 4, at least A1-A6 before any build |
 | Hand-over | KNOWN_ISSUES #6: the hook gaps fixed here are still open in dark-maze-mobile - for its next session |
 
@@ -47,7 +47,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | Phase | What | Status |
 |---|---|---|
 | P0 | Repository set-up: governance, agents, hooks and their self-test, records, CI | ✅ 2026-11-08 |
-| P1 | Requirements to READY: section 4 answered in R2SS; each use case gets actors, priority and numbered AC; a ba-agent pass per use case | ⏳ 🟡 |
+| P1 | Requirements to READY: BA pass on all 8 use cases ✅ 2026-11-08 (all NOT READY; `docs/ba-analysis/*_2026-11-08.md`); clarification Q&A answered 🟡; answers into R2SS (AC, new UC09-UC12); BA re-check to READY | 🔄 🟡 |
 | P2 | Stack and hosting chosen (free plans), dev environment up, an empty page reachable from a test QR code | ⬜ |
 | P3 | Landing page, register and log in (name + phone), consent | ⬜ |
 | P4 | First mini-game end to end with points (the simplest first - proposed: memory cards) | ⬜ |
@@ -59,6 +59,10 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 ---
 
 ## 4. Open questions for Vincent (answer in R2SS PROJ010; the plan follows)
+
+> **2026-11-08: the BA pass superseded A1-A6 and B1-B7 below with one merged list -
+> `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-08.md` (33 decisions with recommended answers). Answer
+> there. B8-B10 below still stand.**
 
 **A. Needed before anything is built**
 
@@ -104,3 +108,4 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 |---|---|
 | 2026-11-08 | Repository set up from PROJ003's framework: CLAUDE.md, WORKFLOW.md, README catalogue, ba/qc/pm agents, the five hooks with a self-test (`npm.cmd run test`, 19 checks; the self-test found that check-progress-updated missed a MASTER_PLAN inside a new untracked folder - fixed with `--untracked-files=all`), records in `docs/`, CI on every push. R2SS PROJ010 read: open questions in section 4 |
 | 2026-11-08 | qc review of the set-up: hooks now refuse staging in the commit command, identity overrides (`-c user.email`, `--author`, `GIT_AUTHOR_EMAIL=`), check the `git -C` repository, read non-ASCII names, catch Singapore phone numbers and email addresses, check specs at any depth with a dated analysis; self-test 40 checks. AI Working Agreement completed; client contact's name moved out of the public repository; KNOWN_ISSUES #5-#7 (prod/dev trap, the same gaps in dark-maze-mobile, cloud and laptop). Cloud and laptop rules in CLAUDE.md and WORKFLOW.md; laptop setup in README |
+| 2026-11-08 | BA pass (ba-agent, 7 checks) on R2SS PROJ010's 8 use cases plus the uncovered points/redemption flow: all NOT READY, 72 questions merged into 33 decisions with recommended answers (`docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-08.md`); 4 new use cases proposed (UC09-UC12 MVP, UC13-UC14 later), UC05 to merge into UC06; 5 conflicts between the analyses resolved in the Q&A. Nothing written to R2SS yet |
