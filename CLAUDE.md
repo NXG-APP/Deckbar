@@ -37,7 +37,8 @@ any difference agreed later is applied here (`docs/MASTER_PLAN.md` section 4).
 - A BA pass (ba-agent) before any use case is planned or built; a fresh-context review (qc-agent) before it is called done.
 - Every customer screen works on a phone browser held upright (R2SS Q009 web application; the games are "mobile friendly").
 - User-facing text is in English (assumption until Vincent decides the languages - `docs/MASTER_PLAN.md` section 4).
-- No real customer data (names, phone numbers, emails, birthdays) in git, tests, screenshots, logs or chat; tests use made-up data.
+- No real customer data (names, phone numbers, emails, birthdays) in git, tests, screenshots, logs or chat; tests use
+  made-up data: phone numbers `+65 0xxx xxxx` (not a Singapore number range), emails at `example.com` *(hook: check-no-secrets)*.
 - Never use the Google Drive connector unless the product owner asks for it in that session.
 - No invisible Unicode (soft hyphen U+00AD, zero-width space U+200B, non-BOM U+FEFF) in committed text.
 - No secrets in git.
@@ -70,6 +71,15 @@ any difference agreed later is applied here (`docs/MASTER_PLAN.md` section 4).
   product owner. Production data is never read or changed by the AI. Procedure: `docs/DEPLOYMENT_RUNBOOK.md`;
   record: `docs/DEPLOYMENT_HISTORY.md`.
 
+**Cloud and laptop** — the repository is worked on from Claude Code on the web (cloud sessions) and from a checkout
+on Vincent's Windows laptop (setup: `README.md`). Git is the only link between them:
+- `main` is the shared branch. A cloud session works on its own branch and comes back to `main` by pull request;
+  the laptop works on `main` or a branch of its own.
+- Never work on the same branch from both places at once. Pull before starting; push before stopping - a cloud
+  session's copy is fresh each time and sees nothing that was not pushed (KNOWN_ISSUES #7).
+- `docs/MASTER_PLAN.md` is the file most likely to collide: re-read it from git right before editing, as below.
+- Stage first, then `git commit` on its own: the commit hooks refuse a commit that stages in the same command.
+
 **Every session**
 - Start: read `docs/MASTER_PLAN.md` first, then `docs/KNOWN_ISSUES.md`; pull the latest code; re-read these standing rules. *(hook: session-start)*
 - During: commit locally as the work goes; push at the end of the session or a finished item.
@@ -84,7 +94,7 @@ change, by an AI that did not write it; **pm-agent** — keeps the records (MAST
 deployment history) and takes over repeated tasks as they are handed over.
 
 **Enforced automatically** (`.claude/hooks/`, wired in `.claude/settings.json`; self-tested by
-`tests/test-hooks.js`): a commit is blocked on the wrong git identity, a staged secret, or a spec without its BA
-analysis; a turn cannot end while code changed and `docs/MASTER_PLAN.md` did not; the start-of-session reading
+`tests/test-hooks.js`): a commit is blocked on the wrong git identity (an override in the command included), a
+staged secret or personal data, a spec without its BA analysis, or staging in the same command; a turn cannot end while code changed and `docs/MASTER_PLAN.md` did not; the start-of-session reading
 is injected at session start. Each commit hook names a one-shot escape variable in its header — use it
 deliberately, from your own terminal, and say so in the commit message.

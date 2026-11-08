@@ -42,10 +42,35 @@ When unsure whether approval is needed: **do the part that needs no decision, as
   every session that changed anything in it.
 - Never edit the R2SS or dark-maze-mobile repositories from this project.
 
+## Hard constraints
+- The repository is public: no secrets, customer data or client commercial terms are ever committed.
+- Budget not set yet: free plans only; anything paid is the product owner's decision first. AI usage is the flat
+  Claude subscription - no API keys or pay-per-use AI.
+- One git identity for the repository: `vuhoang.biz@gmail.com`.
+- Secrets live in GitHub Actions secrets or the hosting provider's variables - never in code, docs, commits or chat.
+
+## Environments
+- The AI acts on dev only. Production - the live site the QR code opens, and its customer data - is changed by the
+  product owner only, by `docs/DEPLOYMENT_RUNBOOK.md`, and recorded in `docs/DEPLOYMENT_HISTORY.md`.
+- Which environments exist is not decided yet.
+
+## Cloud and laptop
+Work happens in cloud sessions and on the owner's laptop; git is the only link. `main` is shared; pull before
+starting, push before stopping, never the same branch in both places at once.
+
 ## Done means
 Tests pass · verified live on a dev environment · a fresh-context review (qc-agent) · a person has reviewed it ·
 the docs that describe it are updated in the same change · evidence shown: test output, the diff, a screenshot
 or recording.
+
+## Records kept
+The progress file (`docs/MASTER_PLAN.md`) · the known-issues / accepted-risk log (`docs/KNOWN_ISSUES.md`) · the
+deployment runbook and history · BA analyses and specs · the file catalogue in `README.md`.
+
+## Enforced automatically
+A commit is refused on the wrong git identity, a staged secret or personal data, a spec without its BA analysis,
+or staging in the same command; a session cannot end with code changed and the progress file not updated; the
+session-start reading is put in front of the AI. Checked by `npm.cmd run test`.
 
 ## Every session
 - **Start:** read the progress file and the known-issues file; pull the latest code; re-read the standing rules.
@@ -53,4 +78,8 @@ or recording.
 
 ## Who decides
 One product owner (Vincent) decides scope and spend, approves the security model and the handling of
-customer data, and reviews every AI change. The client is Saleem (Deckbar). There is no separate QA.
+customer data, and reviews every AI change. The client is Deckbar (its contact is in R2SS). There is no separate QA.
+
+## Not decided yet
+The stack and hosting · environments · budget · languages · how customers log in · points and rewards rules ·
+what the client signs off · whether the repository stays public (`docs/MASTER_PLAN.md` section 4).

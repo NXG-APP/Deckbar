@@ -7,7 +7,7 @@
 > **Use cases live in R2SS, project "PROJ010 - Deckbar gamification".** This plan orders the work; the use
 > cases say what "done" means. When the two disagree, the use case wins and this plan is corrected.
 
-**Last updated:** 2026-11-08 (repository set up with PROJ003's framework, process and governance; R2SS PROJ010 read)
+**Last updated:** 2026-11-08 (repository set up with PROJ003's framework, process and governance; R2SS PROJ010 read; qc review fixed; cloud and laptop rules)
 
 Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ blocked · 🟡 waiting on Vincent
 
@@ -17,11 +17,12 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 
 | | |
 |---|---|
-| Phase | **P0 - repository set-up** ✅ 2026-11-08, on branch `ccr-67d107f0-67ed0e` (the first branch pushed to an empty repository, so GitHub shows it as the default until `main` is made - KNOWN_ISSUES #3). No app code yet |
+| Phase | **P0 - repository set-up** ✅ 2026-11-08, on branch `ccr-67d107f0-67ed0e` (the first branch pushed to an empty repository, so GitHub shows it as the default until `main` is made - KNOWN_ISSUES #3). qc review done, its findings fixed. No app code yet |
 | On `main` | Nothing - `main` does not exist yet |
 | Released | Not released |
-| Next step | **P1 - requirements to READY**: Vincent answers the questions in section 4 (in R2SS PROJ010); then a ba-agent pass per use case |
+| Next step | 🟡 Vincent: review the set-up; create `main` from `ccr-67d107f0-67ed0e` and make it the default branch; then clone on the laptop (`README.md` "On the laptop"). Then **P1 - requirements to READY**: section 4 answered in R2SS PROJ010, a ba-agent pass per use case |
 | Blocked on | 🟡 Vincent: section 4, at least A1-A6 before any build |
+| Hand-over | KNOWN_ISSUES #6: the hook gaps fixed here are still open in dark-maze-mobile - for its next session |
 
 ---
 
@@ -36,7 +37,8 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | 2026-11-08 | "Try not to over-engineer it" (Q011) | Vincent (R2SS) |
 | 2026-11-08 | Mini-games proposed: darts, memory cards, bottle flip (R2SS use cases) | Vincent (R2SS) |
 | 2026-11-08 | Same framework, development process and governance as PROJ003 Dark Maze Mobile: CLAUDE.md, WORKFLOW.md, ba/qc/pm agents, the five hooks, the records in `docs/` | Vincent (this session) |
-| 2026-11-08 | Git identity `vuhoang.biz@gmail.com`, as PROJ003 | Vincent (copied from PROJ003) |
+| 2026-11-08 | Git identity `vuhoang.biz@gmail.com` - PROJ003's rule (its Q202), carried over with the framework; PROJ010's own answer pending (B8) | Copied from PROJ003 |
+| 2026-11-08 | Worked on from cloud sessions and from Vincent's laptop; `main` is the shared branch, cloud branches come back by pull request | Vincent (this session); branch rule proposed by Claude Code |
 
 ---
 
@@ -77,11 +79,12 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | B2 | Memory cards: how many cards, what is "the correct order", any time or tries limit? | Use case "Memory card" |
 | B3 | Bottle flip: a Guinness bottle is a brand - use it (Deckbar's arrangement with the brand?) or a plain bottle? "Physics engine, look real" vs "don't over-engineer": is a 2D physics library enough? | Use case "Mini game - Flip the bottle" |
 | B4 | Languages: English only, or also Chinese, Malay, Tamil? | Q013 |
-| B5 | What does Saleem (client) sign off: rewards, design, go-live? Who owns the design (Deckbar's logo, colours)? | Q086, Q088-Q091 |
+| B5 | What does the client contact (Q086) sign off: rewards, design, go-live? Who owns the design (Deckbar's logo, colours)? | Q086, Q088-Q091 |
 | B6 | Q008 says "DECPA" and "TechBar" - both read as speech-to-text for "Deckbar"; correct in R2SS? | Q008 |
 | B7 | Notifications: which channel first - email, SMS (paid) or browser push? | Q013 |
 | B8 | Should PROJ010's own governance answers be filled in R2SS (Q191 and the AI Development Approach area) as copied from PROJ003, so R2SS can generate this project's AI Working Agreement? | Q191 |
 | B9 | Keep this repository public, or make it private (PROJ003's is private)? | - (GitHub setting) |
+| B10 | Create `main` from `ccr-67d107f0-67ed0e` and set it as the default branch (only you can - KNOWN_ISSUES #3) | - (GitHub setting) |
 
 ---
 
@@ -100,3 +103,4 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | Date | What |
 |---|---|
 | 2026-11-08 | Repository set up from PROJ003's framework: CLAUDE.md, WORKFLOW.md, README catalogue, ba/qc/pm agents, the five hooks with a self-test (`npm.cmd run test`, 19 checks; the self-test found that check-progress-updated missed a MASTER_PLAN inside a new untracked folder - fixed with `--untracked-files=all`), records in `docs/`, CI on every push. R2SS PROJ010 read: open questions in section 4 |
+| 2026-11-08 | qc review of the set-up: hooks now refuse staging in the commit command, identity overrides (`-c user.email`, `--author`, `GIT_AUTHOR_EMAIL=`), check the `git -C` repository, read non-ASCII names, catch Singapore phone numbers and email addresses, check specs at any depth with a dated analysis; self-test 40 checks. AI Working Agreement completed; client contact's name moved out of the public repository; KNOWN_ISSUES #5-#7 (prod/dev trap, the same gaps in dark-maze-mobile, cloud and laptop). Cloud and laptop rules in CLAUDE.md and WORKFLOW.md; laptop setup in README |

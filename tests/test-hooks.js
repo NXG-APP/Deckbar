@@ -15,8 +15,8 @@ const IDENTITY = "vuhoang.biz@gmail.com";
 let passed = 0;
 let failed = 0;
 
-function repo(email) {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "deckbar-hooks-"));
+function repo(email, prefix = "") {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), `${prefix}deckbar-hooks-`));
   const git = (...args) => execFileSync("git", args, { cwd: dir, stdio: ["ignore", "pipe", "ignore"] });
   git("init", "-q");
   git("config", "user.email", email);
@@ -63,9 +63,35 @@ console.log("verify-git-identity");
   const r = run("verify-git-identity", commit(bad.dir));
   check("another identity is denied", denied(r), r);
   check("a non-commit command is ignored", allowed(run("verify-git-identity", commit(bad.dir, "git status"))));
-  check("a chained commit is caught", denied(run("verify-git-identity", commit(bad.dir, "git add . && git commit -m x"))));
+  check("a chained commit is caught", denied(run("verify-git-identity", commit(bad.dir, "git status && git commit -m x"))));
+  const dom = "@x" + ".com";
+  check("-c user.email= is denied", denied(run("verify-git-identity", commit(good.dir, `git -c user.email=evil${dom} commit -m x`))));
+  check("--author with another email is denied",
+    denied(run("verify-git-identity", commit(good.dir, `git commit --author="E <e${dom}>" -m x`))));
+  check("--author with the agreed email is allowed",
+    allowed(run("verify-git-identity", commit(good.dir, `git commit --author="Vincent Le <${IDENTITY}>" -m x`))));
+  check("a GIT_AUTHOR_EMAIL= prefix is seen and denied",
+    denied(run("verify-git-identity", commit(good.dir, `GIT_AUTHOR_EMAIL=a${dom} git commit -m x`))));
+  check("git -C <other repo> checks that repo", denied(run("verify-git-identity", commit(good.dir, `git -C "${bad.dir}" commit -m x`))));
+  const spaced = repo("someone@example.com", "with space ");
+  check("git -C with a quoted path holding a space checks that repo",
+    denied(run("verify-git-identity", commit(good.dir, `git -C "${spaced.dir}" commit -m x`))));
   check("the escape lets one commit through",
     allowed(run("verify-git-identity", commit(bad.dir), { PROJ010_DECKBAR_SKIP_IDENTITY: "1" })));
+}
+
+console.log("staging in the same command");
+{
+  const r = repo(IDENTITY);
+  r.stage("src/ok.js", "1\n");
+  for (const [name, cmd] of [
+    ["git add -A && git commit", "git add -A && git commit -m x"],
+    ["git commit -am", "git commit -am x"],
+    ["git commit --all", "git commit --all -m x"],
+    ["git commit with a path", "git commit -m x src/ok.js"],
+  ]) check(`${name} is denied`, denied(run("check-no-secrets", commit(r.dir, cmd))));
+  check("a message containing -a is not staging", allowed(run("check-no-secrets", commit(r.dir, 'git commit -m "fix -a flag" -m "body"'))));
+  check("--amend is not staging", allowed(run("check-no-secrets", commit(r.dir, "git commit --amend --no-edit"))));
 }
 
 console.log("check-no-secrets");
@@ -87,6 +113,22 @@ console.log("check-no-secrets");
   const r4 = repo(IDENTITY);
   r4.stage(".env.example", "API" + "_KEY=\"" + "y".repeat(16) + "\"\n");
   check("an .example file is allowed", allowed(run("check-no-secrets", commit(r4.dir))));
+
+  const r5 = repo(IDENTITY);
+  r5.stage("caf\u00e9.txt", "pass" + "word: \"" + "z".repeat(12) + "\"\n");
+  check("a secret in a non-ASCII file name is denied", denied(run("check-no-secrets", commit(r5.dir))));
+
+  const r6 = repo(IDENTITY);
+  r6.stage("notes.md", "call +" + "65 9123 4567\n");
+  check("a Singapore phone number is denied", denied(run("check-no-secrets", commit(r6.dir))));
+
+  const r7 = repo(IDENTITY);
+  r7.stage("notes.md", "mail tan" + "@" + "gmail.com\n");
+  check("a real-looking email is denied", denied(run("check-no-secrets", commit(r7.dir))));
+
+  const r8 = repo(IDENTITY);
+  r8.stage("tests/data.js", "const c = { phone: '+65 0000 0001', email: 'tan@example.com', sha: 'a65912345678' };\n");
+  check("made-up test data and a hash are allowed", allowed(run("check-no-secrets", commit(r8.dir))));
 }
 
 console.log("check-ba-analysis");
@@ -106,6 +148,15 @@ console.log("check-ba-analysis");
   r3.stage("docs/specs/use-cases/Dart_Game_Spec.md", "# spec\n");
   check("a spec in a sub-folder with an already tracked analysis is allowed",
     allowed(run("check-ba-analysis", commit(r3.dir))));
+
+  const r5 = repo(IDENTITY);
+  r5.stage("docs/specs/a/b/Login_Spec.md", "# spec\n");
+  check("a spec two folders deep is checked", denied(run("check-ba-analysis", commit(r5.dir))));
+
+  const r6 = repo(IDENTITY);
+  r6.stage("docs/specs/Login_Spec.md", "# spec\n");
+  r6.stage("docs/ba-analysis/Login_BA_Analysis_.md", "# ba\n");
+  check("an analysis without its date does not count", denied(run("check-ba-analysis", commit(r6.dir))));
 
   const r4 = repo(IDENTITY);
   r4.stage("docs/specs/use-cases/UC02_Dart_mini_game_Detail.md", "# detail\n");
@@ -127,6 +178,23 @@ console.log("check-progress-updated");
   const r3 = repo(IDENTITY);
   r3.write("README.md", "# docs only\n");
   check("a docs-only change lets the stop through", allowed(run("check-progress-updated", { cwd: r3.dir })));
+
+  const r4 = repo(IDENTITY);
+  r4.write(".claude/hooks/x.js", "1\n");
+  check("a hook change counts as code", run("check-progress-updated", { cwd: r4.dir }).out?.decision === "block");
+
+  const r5 = repo(IDENTITY);
+  r5.write("index.html", "<p>\n");
+  check("a code file at the root counts as code", run("check-progress-updated", { cwd: r5.dir }).out?.decision === "block");
+
+  const r6 = repo(IDENTITY);
+  r6.write("docs/MASTER_PLAN.md", "# plan\n");
+  r6.commitAll("plan");
+  execFileSync("git", ["commit", "-q", "--amend", "-m", "plan", "--date", "2000-01-01T00:00:00"],
+    { cwd: r6.dir, env: { ...process.env, GIT_COMMITTER_DATE: "2000-01-01T00:00:00" } });
+  execFileSync("git", ["rm", "-q", "docs/MASTER_PLAN.md"], { cwd: r6.dir });
+  r6.write("src/app.js", "1\n");
+  check("deleting MASTER_PLAN is not an update", run("check-progress-updated", { cwd: r6.dir }).out?.decision === "block");
 
   check("a second stop never loops",
     allowed(run("check-progress-updated", { cwd: r1.dir, stop_hook_active: true })));

@@ -17,8 +17,8 @@ The rules live in `CLAUDE.md`; this file says who applies them. Every file named
 
 - **One product owner** (Vincent, R2SS Q086): decides scope and spend, approves the security model and how
   customer data is handled, reviews every AI change and tries each build on a phone.
-- **The client** (Saleem, Deckbar, R2SS Q086): what Saleem signs off (rewards, design, go-live) is not yet
-  agreed - `docs/MASTER_PLAN.md` section 4.
+- **The client** (Deckbar; the contact is named in R2SS Q086, not here - the repository is public): what the
+  client signs off (rewards, design, go-live) is not yet agreed - `docs/MASTER_PLAN.md` section 4.
 - There is no separate QA — qc-agent plus the owner's review is the QA.
 - Spend is approved by the product owner before any paid plan, paid model or paid service.
 
@@ -26,6 +26,20 @@ The rules live in `CLAUDE.md`; this file says who applies them. Every file named
 
 - One fixed identity for the repository: `vuhoang.biz@gmail.com` *(hook: verify-git-identity)*.
 - Commit; push; never rewrite published history; tag releases — see `docs/DEPLOYMENT_RUNBOOK.md`.
+- Stage first, then `git commit` on its own (the commit hooks check only what is already staged).
+- `main` is the shared branch; cloud session branches come back to it by pull request, reviewed by the owner.
+
+## Cloud and laptop
+
+| | Cloud (Claude Code on the web) | Laptop (Windows, Claude Code locally) |
+|---|---|---|
+| Copy of the repository | Fresh clone each session | One checkout, kept |
+| Branch | The session's own branch | `main` or a branch of its own |
+| Start | Pull; read MASTER_PLAN and KNOWN_ISSUES (hook) | `git pull`; the same reading (hook) |
+| End | Commit, push, pull request to `main` | Commit, push |
+| Owner's commands | - | `npm.cmd run <script>` |
+
+Never the same branch in both places at once (KNOWN_ISSUES #7).
 
 ## Definition of done
 
