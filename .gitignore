@@ -1,0 +1,27 @@
+# Node / build
+node_modules/
+dist/
+build/
+.next/
+.vercel/
+.wrangler/
+.env*
+!.env*.example
+
+# Customer data must never be committed (this repository is public)
+*.csv
+exports/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.claude/settings.local.json
+
+# Test output
+tests/shots/
+test-results/
+playwright-report/
+
+# Hand-over drop folder (never committed; files are filed into the repo deliberately)
+Temp for Claude/

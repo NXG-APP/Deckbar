@@ -1,0 +1,12 @@
+{
+  "name": "deckbar-games",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Deckbar Games - QR mini-games, points and rewards for Deckbar customers (R2SS PROJ010).",
+  "scripts": {
+    "test": "node tests/test-hooks.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

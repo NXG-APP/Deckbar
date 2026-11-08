@@ -1,0 +1,26 @@
+# The one test command (CLAUDE.md "Verification"). The repository is public, so GitHub Actions minutes on
+# standard runners are free: unlike PROJ003 (private, weekly only), this runs on every push and pull request.
+name: tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: npm test
