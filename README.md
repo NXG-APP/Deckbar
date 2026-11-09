@@ -17,7 +17,8 @@ Status: repository set up (2026-11-08); no app code yet. Where things stand: `do
 Work happens both in Claude Code on the web and on this checkout; rules in `CLAUDE.md` "Cloud and laptop".
 
 1. Install Git for Windows and Node.js 20 or later.
-2. `git clone https://github.com/NXG-APP/Deckbar.git`, then in the folder:
+2. Clone into the laptop folder `D:\Projects\Proj010 - Deckbar` (Vincent 2026-11-09):
+   `git clone https://github.com/NXG-APP/Deckbar.git "D:\Projects\Proj010 - Deckbar"`, then in the folder:
    `git config user.email vuhoang.biz@gmail.com` and `git config user.name "Vincent Le"` - the commit hook refuses any other identity.
 3. `npm.cmd run test` - must end `0 failed`; it proves the hooks run on this machine.
 4. Start Claude Code in the folder: the session-start reading appears first (KNOWN_ISSUES #4).

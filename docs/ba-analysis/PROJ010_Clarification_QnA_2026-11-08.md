@@ -1,5 +1,8 @@
 # PROJ010 Deckbar Games — Clarification Q&A (2026-11-08)
 
+> **Status 2026-11-09: all 33 accepted by Vincent as recommended ("accept all") and written into R2SS PROJ010**
+> (14 use cases; detail in `docs/specs/use-cases/UC01-UC14_*_Detail.md`).
+
 The ba-agent pass on all 8 R2SS use cases (snapshot 2026-11-08) gave **NOT READY** for every one: none has a
 priority, acceptance criteria or logic flow yet. The 7 analyses asked 72 questions; this file merges them into
 **33 decisions**, each with one recommended answer. Where the analyses disagreed, the conflict and the choice
