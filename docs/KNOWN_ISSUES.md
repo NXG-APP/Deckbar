@@ -46,6 +46,8 @@ last; an entry is never deleted, only its Status changes. Every entry has exactl
 - **Revisit trigger:** The first pull request is opened, or the first build is deployed.
 - **Details:** Fix (Vincent, on GitHub): create `main` from this branch, set it as the default in Settings - Branches,
   and from then on work arrives on `main` by pull request.
+  2026-11-09: `main` created from `ccr-67d107f0-67ed0e` (`ce056a3`) by the cloud session, with Vincent's OK. Still
+  to do (Vincent): set `main` as the default branch; then the old branch can be deleted.
 
 ## 4. Hooks only apply to sessions started after they are committed
 
@@ -56,6 +58,8 @@ last; an entry is never deleted, only its Status changes. Every entry has exactl
 - **Revisit trigger:** The first session started on a checkout that contains `.claude/settings.json` - confirm the session-start reading appears.
 - **Details:** The set-up session checked the same things by hand: the git identity before committing, and the
   hook self-test (`npm.cmd run test`).
+  2026-11-09: confirmed in a cloud session started on the committed checkout - the session-start reading appeared
+  unprompted. Not yet checked on the laptop. Status for Vincent to set.
 
 ## 5. Production/dev mix-up is the known trap
 
