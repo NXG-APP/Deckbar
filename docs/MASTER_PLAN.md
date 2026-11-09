@@ -7,7 +7,7 @@
 > **Use cases live in R2SS, project "PROJ010 - Deckbar gamification".** This plan orders the work; the use
 > cases say what "done" means. When the two disagree, the use case wins and this plan is corrected.
 
-**Last updated:** 2026-11-09 (`main` created from the cloud session; work continues in cloud sessions)
+**Last updated:** 2026-11-09 (`main` created from the cloud session; R2SS Q026 = ready for 10,000 customers; stack, hosting and budget proposed with the open questions)
 
 Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ blocked · 🟡 waiting on Vincent
 
@@ -20,7 +20,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | Phase | **P0 - repository set-up** ✅ 2026-11-08. qc review done, its findings fixed. No app code yet |
 | On `main` | `ce056a3` - the whole set-up and P1 so far; created 2026-11-09 from `ccr-67d107f0-67ed0e`, which nobody works on any more. Work continues in cloud sessions, each on its own branch, back to `main` by pull request |
 | Released | Not released |
-| Next step | **P2 starts with one decision**: the tech stack, hosting and budget (A6 below - Claude Code proposes, Vincent decides); then a ba-agent re-check of the 11 Must use cases against the stack, to READY |
+| Next step | 🟡 **Vincent answers `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md`** (S1-S10 stack, hosting, budget = A6; P1-P13 open questions; R1-R10 R2SS answers to fill). Then the answers go into R2SS, `docs/ARCHITECTURE.md` is written, and ba-agent re-checks the 11 Must use cases against the stack, to READY |
 | Blocked on | 🟡 Vincent: A6 (stack, hosting, budget) before any build; set `main` as the default branch on GitHub (B10) |
 | Hand-over | KNOWN_ISSUES #6: the hook gaps fixed here are still open in dark-maze-mobile - for its next session |
 
@@ -42,6 +42,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | 2026-11-09 | All 33 decisions of `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-08.md` accepted as recommended ("accept all"): sign-in first; Google or emailed link; one account per unverified mobile number; 18+ and per-channel consent; 10 points for the first win per game per business day (06:00 Singapore); the server decides; redeem only at the bar with a 10-minute code confirmed on the staff's own screen; Admin and Staff roles; plain bottle, 2D physics; birthday gift and campaigns in Phase 2 | Vincent |
 | 2026-11-09 | The laptop checkout lives in `D:\Projects\Proj010 - Deckbar` | Vincent |
 | 2026-11-09 | `main` created from the cloud session (option A of the hand-over), not from the laptop; work continues in cloud sessions from here on | Vincent |
+| 2026-11-09 | Ready for 10,000 registered customers (R2SS Q026); the Q001 goal of 1,000 is unchanged unless P1 says otherwise | Vincent |
 
 ---
 
@@ -77,7 +78,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | A3 | Points and rewards: points per game, what each reward costs, how a reward is redeemed at the bar (staff checks a code on the phone?), limits per day or per visit | New use case(s) | Rewards are free drinks: they must not be farmed by replaying |
 | A4 | Login: name + phone number with no check, or a one-time code by SMS (costs money per SMS)? One account per phone number? | Q035, Q036 | Security model and spend - ask-first items |
 | A5 | Consent and personal data: customers' details are used for promotion (Q008). Singapore's PDPA expects clear consent for that, and SMS/calls to Singapore numbers fall under the Do Not Call rules. Who at Deckbar is responsible for the data, and how long is it kept? | Q034-Q042, Q101 | Compliance - ask-first; worth confirming with someone who knows Singapore law |
-| A6 | Tech stack, hosting and budget (proposed: a static web app on a free host plus a free-tier database with sign-in; to be confirmed) | Q043, Q050-Q054 | Decides P2 |
+| A6 | Tech stack, hosting and budget - proposed 2026-11-09 in `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md` S1-S10 (Cloudflare Pages + Supabase + Brevo, USD 0 a month; open: Deckbar's domain, backups, account ownership) | Q043, Q050-Q054, Q109 | Decides P2 |
 
 **B. Needed before the item they touch**
 
@@ -115,3 +116,4 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | 2026-11-08 | BA pass (ba-agent, 7 checks) on R2SS PROJ010's 8 use cases plus the uncovered points/redemption flow: all NOT READY, 72 questions merged into 33 decisions with recommended answers (`docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-08.md`); 4 new use cases proposed (UC09-UC12 MVP, UC13-UC14 later), UC05 to merge into UC06; 5 conflicts between the analyses resolved in the Q&A. Nothing written to R2SS yet |
 | 2026-11-09 | Vincent accepted the Q&A. Written into R2SS PROJ010 (writing switched on by Vincent): Q010 (+Staff), Q015 (completed), Q071, Q074, Q035, Q036, Q037, Q038, Q100, Q101; 8 use cases given description, priority and numbered AC (UC05 merged as Won't; UC06 renamed "Admin view customers and engagement"); 6 created (Earn points from a game, My points and rewards, Redeem a reward at the bar, Staff and admin sign-in - Must; Birthday gift, Promotion campaigns - Phase 2). Nothing refused. 14 detail files `docs/specs/use-cases/UC01-UC14_*_Detail.md`. Hand-over for the laptop session (`D:\Projects\Proj010 - Deckbar`) |
 | 2026-11-09 | Cloud session: hand-over steps checked on Linux - self-test 40 passed, 0 failed (Node 22); the session-start reading appeared at session start (KNOWN_ISSUES #4 confirmed for cloud sessions; the laptop is unchecked). `main` pushed from `ccr-67d107f0-67ed0e` at `ce056a3` with Vincent's OK. Vincent: work continues in cloud sessions |
+| 2026-11-09 | R2SS Q026 written: ready for 10,000 registered customers (Vincent). `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md`: stack, hosting and budget proposed (S1-S10, sized for 10,000), 13 open questions (P1-P13, new concerns: staff Google accounts, public repository and bottle-flip anti-cheat, email sender domain) and 10 R2SS answers to fill (R1-R10). Provider pricing pages blocked from the cloud session: figures from web search, marked to check at sign-up |
