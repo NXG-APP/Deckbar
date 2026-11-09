@@ -7,7 +7,7 @@
 > **Use cases live in R2SS, project "PROJ010 - Deckbar gamification".** This plan orders the work; the use
 > cases say what "done" means. When the two disagree, the use case wins and this plan is corrected.
 
-**Last updated:** 2026-11-09 (`main` created from the cloud session; R2SS Q026 = ready for 10,000 customers; stack, hosting and budget proposed with the open questions)
+**Last updated:** 2026-11-09 (`main` created; R2SS Q026 = ready for 10,000 customers; stack, hosting and budget proposed with the open questions; work handed to the laptop session)
 
 Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ blocked · 🟡 waiting on Vincent
 
@@ -18,10 +18,10 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | | |
 |---|---|
 | Phase | **P0 - repository set-up** ✅ 2026-11-08. qc review done, its findings fixed. No app code yet |
-| On `main` | `ce056a3` - the whole set-up and P1 so far; created 2026-11-09 from `ccr-67d107f0-67ed0e`, which nobody works on any more. Work continues in cloud sessions, each on its own branch, back to `main` by pull request |
+| On `main` | `ce056a3`, created 2026-11-09 from `ccr-67d107f0-67ed0e` (nobody works on it any more). The cloud session's work (records, the 2026-11-09 Q&A) is on `claude/friendly-ramanujan-rik6iu`, coming to `main` by pull request for Vincent to merge. From then on: **the laptop works on `main`**; nobody works on either old branch |
 | Released | Not released |
-| Next step | 🟡 **Vincent answers `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md`** (S1-S10 stack, hosting, budget = A6; P1-P13 open questions; R1-R10 R2SS answers to fill). Then the answers go into R2SS, `docs/ARCHITECTURE.md` is written, and ba-agent re-checks the 11 Must use cases against the stack, to READY |
-| Blocked on | 🟡 Vincent: A6 (stack, hosting, budget) before any build; set `main` as the default branch on GitHub (B10) |
+| Next step | 1. Vincent merges the cloud session's pull request and sets up the laptop (hand-over 2026-11-09, second). 2. 🟡 **Vincent answers `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md`** (S1-S10 stack, hosting, budget = A6; P1-P13 open questions; R1-R10 R2SS answers to fill). Then the answers go into R2SS, `docs/ARCHITECTURE.md` is written, and ba-agent re-checks the 11 Must use cases against the stack, to READY |
+| Blocked on | 🟡 Vincent: merge the pull request; set `main` as the default branch on GitHub (B10); A6 (stack, hosting, budget) before any build |
 | Hand-over | KNOWN_ISSUES #6: the hook gaps fixed here are still open in dark-maze-mobile - for its next session |
 
 ---
@@ -43,6 +43,7 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | 2026-11-09 | The laptop checkout lives in `D:\Projects\Proj010 - Deckbar` | Vincent |
 | 2026-11-09 | `main` created from the cloud session (option A of the hand-over), not from the laptop; work continues in cloud sessions from here on | Vincent |
 | 2026-11-09 | Ready for 10,000 registered customers (R2SS Q026); the Q001 goal of 1,000 is unchanged unless P1 says otherwise | Vincent |
+| 2026-11-09 | Work moves from the cloud session to the laptop (`D:\Projects\Proj010 - Deckbar`), on `main`, once the cloud session's pull request is merged | Vincent |
 
 ---
 
@@ -117,3 +118,4 @@ Status keys: ✅ done · 🔄 in progress · ⏳ next · ⬜ not started · ⛔ 
 | 2026-11-09 | Vincent accepted the Q&A. Written into R2SS PROJ010 (writing switched on by Vincent): Q010 (+Staff), Q015 (completed), Q071, Q074, Q035, Q036, Q037, Q038, Q100, Q101; 8 use cases given description, priority and numbered AC (UC05 merged as Won't; UC06 renamed "Admin view customers and engagement"); 6 created (Earn points from a game, My points and rewards, Redeem a reward at the bar, Staff and admin sign-in - Must; Birthday gift, Promotion campaigns - Phase 2). Nothing refused. 14 detail files `docs/specs/use-cases/UC01-UC14_*_Detail.md`. Hand-over for the laptop session (`D:\Projects\Proj010 - Deckbar`) |
 | 2026-11-09 | Cloud session: hand-over steps checked on Linux - self-test 40 passed, 0 failed (Node 22); the session-start reading appeared at session start (KNOWN_ISSUES #4 confirmed for cloud sessions; the laptop is unchecked). `main` pushed from `ccr-67d107f0-67ed0e` at `ce056a3` with Vincent's OK. Vincent: work continues in cloud sessions |
 | 2026-11-09 | R2SS Q026 written: ready for 10,000 registered customers (Vincent). `docs/ba-analysis/PROJ010_Clarification_QnA_2026-11-09.md`: stack, hosting and budget proposed (S1-S10, sized for 10,000), 13 open questions (P1-P13, new concerns: staff Google accounts, public repository and bottle-flip anti-cheat, email sender domain) and 10 R2SS answers to fill (R1-R10). Provider pricing pages blocked from the cloud session: figures from web search, marked to check at sign-up |
+| 2026-11-09 | Cloud session wrapped up at Vincent's request: pull request from `claude/friendly-ramanujan-rik6iu` to `main`; hand-over for the laptop session (clone, identity, self-test, hooks check, then the 2026-11-09 Q&A). Nothing left uncommitted; no R2SS write pending |
